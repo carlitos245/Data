@@ -39,12 +39,14 @@ document.getElementById('exportCSV').addEventListener('click', function() {
         csvContent += rowContent + '\n';
     });
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'utilisateures.csv';
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-});
+   document.getElementById("downloadBtn").addEventListener("click", () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Ton contenu ici
+    const content = "Liste des utilisateurs\n\n- Carlos\n- Marie\n- Julien";
+
+    doc.text(content, 10, 10); // texte à partir de la position (x=10, y=10)
+    doc.save("utilisateurs.pdf"); // nom du fichier
+  }); 
+
