@@ -1,3 +1,13 @@
+// Fonction de nettoyage
+    function sanitize(input) {
+    return input
+    .replace(/&/g, "&amp;")   // remplace & par &amp;
+    .replace(/</g, "&lt;")    // remplace < par &lt;
+    .replace(/>/g, "&gt;")    // remplace > par &gt;
+    .replace(/"/g, "&quot;")  // remplace " par &quot;
+    .replace(/'/g, "&#039;"); // remplace ' par &#039;
+}
+
 document.getElementById('userForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -23,7 +33,7 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
     cellAdresse.textContent = adresse;
     cellTelephone.textContent = telephone;
     cellEmail.textContent = email;
-
+    
     // Réinitialiser le formulaire
     document.getElementById('userForm').reset();
 });
@@ -64,6 +74,7 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
 
   doc.save("utilisateurs.pdf");
 });
+
 
 
 
