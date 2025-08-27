@@ -1,6 +1,11 @@
 document.getElementById('userForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
+    //la date du jour
+    const date = new Date().toLocaleDateString("fr-FR");
+    doc.setFontSize(10);
+    doc.text(`Date : ${date}`, 14, 18);
+
     // Récupérer les valeurs des champs du formulaire
     const nom = document.getElementById('nom').value;
     const age = document.getElementById('age').value;
@@ -55,6 +60,7 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
 
   doc.save("utilisateurs.pdf");
 });
+
 
 
 
