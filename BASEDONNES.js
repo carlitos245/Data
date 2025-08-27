@@ -28,17 +28,6 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
     document.getElementById('userForm').reset();
 });
 
-document.getElementById('exportCSV').addEventListener('click', function() {
-    const table = document.getElementById('userTable');
-    const rows = table.querySelectorAll('tr');
-    let csvContent = '';
-
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('th, td');
-        const rowContent = Array.from(cells).map(cell => cell.textContent).join(',');
-        csvContent += rowContent + '\n';
-    });
-
    document.getElementById("downloadBtn").addEventListener("click", () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -49,4 +38,5 @@ document.getElementById('exportCSV').addEventListener('click', function() {
     doc.text(content, 10, 10); // texte à partir de la position (x=10, y=10)
     doc.save("utilisateurs.pdf"); // nom du fichier
   }); 
+
 
