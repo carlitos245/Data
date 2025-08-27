@@ -1,11 +1,6 @@
 document.getElementById('userForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    //la date du jour
-    const date = new Date().toLocaleDateString("fr-FR");
-    doc.setFontSize(10);
-    doc.text(`Date : ${date}`, 14, 18);
-
     // Récupérer les valeurs des champs du formulaire
     const nom = document.getElementById('nom').value;
     const age = document.getElementById('age').value;
@@ -36,7 +31,16 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
    document.getElementById("downloadBtn").addEventListener("click", () => {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
+       
+  // Ajouter le titre
+  doc.setFontSize(14);
+  doc.text("Liste des Utilisateurs", doc.internal.pageSize.getWidth() / 2, 10, { align: "center" });
 
+  // Ajouter la date du jour
+  const date = new Date().toLocaleDateString("fr-FR");
+  doc.setFontSize(10);
+  doc.text(`Date : ${date}`, 14, 18); // Position sous le titre
+       
   // Récupérer les données du tableau
   const table = document.getElementById("userTable");
   const rows = table.querySelectorAll("tbody tr");
@@ -60,6 +64,7 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
 
   doc.save("utilisateurs.pdf");
 });
+
 
 
 
