@@ -29,14 +29,33 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
 });
 
    document.getElementById("downloadBtn").addEventListener("click", () => {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-    // Ton contenu ici
-    const content = "Liste des utilisateurs\n\n- Carlos\n- Marie\n- Julien";
+  // Récupérer les données du tableau
+  const table = document.getElementById("userTable");
+  const rows = table.querySelectorAll("tbody tr");
 
-    doc.text(content, 10, 10); // texte à partir de la position (x=10, y=10)
-    doc.save("utilisateurs.pdf"); // nom du fichier
-  }); 
+  const data = Array.from(rows).map(row => {
+    const cells = row.querySelectorAll("td");
+    return Array.from(cells).map(cell => cell.textContent);
+  });
+
+  // En-têtes du tableau
+  const headers = [["Nom", "Âge", "Adresse", "Téléphone", "Email"]];
+
+  // Générer le tableau dans le PDF
+  doc.autoTable({
+    head: headers,
+    body: data,
+    startY: 20,
+    theme: 'grid',
+    styles: { fontSize: 10 }
+  });
+
+  doc.save("utilisateurs.pdf");
+});
+
+
 
 
